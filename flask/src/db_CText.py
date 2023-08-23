@@ -12,7 +12,7 @@ class CText(db.Model):
     font_type = db.Column(db.String)
     # position_x = db.Column(db.Float)
     # position_y = db.Column(db.Float)
-    # italic = db.Column(db.Boolean)  #booleanの扱いがわからないからそこを調べる必要あり
+    italic = db.Column(db.Integer)  #booleanの扱いがわからないからそこを調べる必要あり
 
 # APIに初めてリクエストが送信されたときにだけデータベースの作成を行う
 @app.before_request
@@ -80,6 +80,7 @@ def Put_CText(id):
     # entry.position_x = data["position_x"]
     # entry.position_y = data["position_y"]
     # entry.italic = data["italic"]
+    
     db.session.merge(entry)
     db.session.commit()
     db.session.close()

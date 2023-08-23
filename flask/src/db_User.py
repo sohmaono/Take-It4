@@ -1,11 +1,10 @@
 from src import app, db, ma
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, desc, ARRAY
+from sqlalchemy import Column, Integer, String, desc
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    sample = db.Column(ARRAY(db.String))
 
 
 # APIに初めてリクエストが送信されたときにだけデータベースの作成を行う
