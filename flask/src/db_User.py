@@ -40,13 +40,7 @@ def post_User():
     else:
         data = json
     
-    entry.font_scale = data["font_scale"]
-    entry.font_weight = data["font_weight"]
-    entry.line_spacing = data["line_spacing"]
-    entry.font_type = data["font_type"]
-    # entry.position_x = data["position_x"]
-    # entry.position_y = data["position_y"]
-    # entry.italic = data["italic"]
+    entry.sample = data["sample"]
 
     db.session.add(entry)
     db.session.commit()
@@ -67,13 +61,7 @@ def Put_User(id):
     else:
         data = json
 
-    entry.font_scale = data["font_scale"]
-    entry.font_weight = data["font_weight"]
-    entry.line_spacing = data["line_spacing"]
-    entry.font_type = data["font_type"]
-    # entry.position_x = data["position_x"]
-    # entry.position_y = data["position_y"]
-    # entry.italic = data["italic"]
+    entry.sample = data["sample"]
     db.session.merge(entry)
     db.session.commit()
     db.session.close()
