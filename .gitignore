@@ -4,4 +4,6 @@
 *.xcuserstate
 xcuserdata/
 DerivedData/
+instance/
+*__pycache__
 
