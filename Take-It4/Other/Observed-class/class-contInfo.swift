@@ -79,7 +79,8 @@ class ContentInformation: ObservableObject {
     }
     
     
-    @Published var frameHeight: CGFloat = 450
+    @Published var frameHeight: CGFloat = 590
+    
     func addFrameHeight(){
         if frameHeight <= 12000 {
             frameHeight += 140

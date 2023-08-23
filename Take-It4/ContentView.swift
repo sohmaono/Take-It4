@@ -11,14 +11,10 @@ struct ContentView: View {
     
     @State var tabSelection = 0
     
-    init(){
-        UITabBar.appearance().backgroundColor = .black
-    }
-    
     var body: some View {
         ZStack {
             TabView(selection: $tabSelection){
-                CollectionMainView().tag(0)
+                CollectionContentView().tag(0)
                 
                 SharePictureHomeView().tag(1)
                 
@@ -26,6 +22,7 @@ struct ContentView: View {
             }
             .tabViewStyle(.page)
             .ignoresSafeArea()
+            
             CustomTabView2(num: $tabSelection)
         }
     }

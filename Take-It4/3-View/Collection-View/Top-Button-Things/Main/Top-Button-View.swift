@@ -75,7 +75,7 @@ struct CollectionTopButtonView: View {
                 .frame(height: 2)
         }
         .background(
-            Color(red: 0.98, green: 0.98, blue: 0.98)
+            Color(red: 0.9, green: 0.9, blue: 0.9)
                 .ignoresSafeArea())
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionContentView: View {
+struct CollectionMainView: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var editPicData: EditPicData
@@ -19,7 +19,7 @@ struct CollectionContentView: View {
                 VStack {
                     GeometryReader {
                         geometry in
-                        CollectionContent(
+                        CollectionPicText(
                             contInfo: contInfo,
                             dragData: dragData,
                             editPicData: editPicData)
@@ -35,9 +35,9 @@ struct CollectionContentView: View {
                             }
                     }
                     .frame(height: contInfo.frameHeight)
+                    .background(Color.white)
                     .clipped()
                     
-                    CollectionDate()
                     FrameHeightButton(contInfo: contInfo)
                 }
             }

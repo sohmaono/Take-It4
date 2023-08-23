@@ -19,10 +19,10 @@ struct CustomTabView2: View {
             Spacer()
             ZStack {
                 Capsule(style: .continuous)
-                    .foregroundColor(Color(red: 0.15, green: 0.15, blue: 0.15))
-                    .padding(.horizontal,22)
+                    .foregroundColor(Color(red: 0.3, green: 0.3, blue: 0.3))
+                    .padding(.horizontal,32)
                     .padding(.vertical,17)
-                    .frame(height: 75)
+                    .frame(height: 72)
                 HStack {
                     ForEach(0...2,id:\.self){
                         item in
@@ -31,9 +31,9 @@ struct CustomTabView2: View {
                             ZStack {
                                 Circle()
                                     .trim(from: 0.5)
-                                    .frame(width: 63)
+                                    .frame(width: 60)
                                     .offset(y:2)
-                                    .foregroundColor(Color(red: 0.15, green: 0.15, blue: 0.15))
+                                    .foregroundColor(Color(red: 0.3, green: 0.3, blue: 0.3))
                                     .opacity(num == item ? 1:0)
                                 VStack(spacing: 6){
                                     Image(systemName: picArray[item])
@@ -62,7 +62,7 @@ struct CustomTabView2: View {
                         }
                     }
                 }
-                .padding(.horizontal,35)
+                .padding(.horizontal,45)
             }
             .onAppear{
                 num2 = num
@@ -73,6 +73,7 @@ struct CustomTabView2: View {
                 }
             }
         }
+        .padding(.bottom,5)
         .ignoresSafeArea()
     }
 }

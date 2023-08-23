@@ -16,7 +16,7 @@ struct DeleteEditSave: View{
         VStack {
             HStack {
                 Spacer()
-                VStack(spacing:14){
+                VStack(spacing:11){
                     Button(action:{
                         contInfo.deleteSelected()
                     }){
@@ -63,7 +63,7 @@ struct DeleteEditSave: View{
                         }
                     }
                 }
-                .padding(10)
+                .padding(14)
             }
             Spacer()
         }

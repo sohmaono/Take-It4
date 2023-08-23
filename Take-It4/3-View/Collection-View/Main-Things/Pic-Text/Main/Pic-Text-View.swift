@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionContent: View {
+struct CollectionPicText: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -35,8 +35,6 @@ struct CollectionContent: View {
                     contInfo: contInfo,
                     dragData: dragData)
             }
-            
-            CollectionLikedPictureNumber()
             
             if contInfo.selectedBool {
                 DeleteEditSave(

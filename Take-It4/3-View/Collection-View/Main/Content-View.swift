@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionMainView: View {
+struct CollectionContentView: View {
     
     @StateObject var contInfo = ContentInformation()
     @StateObject var editPicData = EditPicData()
@@ -16,16 +16,19 @@ struct CollectionMainView: View {
     var body: some View {
         ZStack{
             VStack(spacing: 0){
+                
                 CollectionTopButtonView(
                     sheetName: "car",
                     contInfo: contInfo,
                     editPicData: editPicData)
                 
-                CollectionContentView(
+                CollectionMainView(
                     contInfo: contInfo,
                     editPicData: editPicData,
                     dragData: dragData)
+                
             }
+//            .background(Color(red: 0.95, green: 0.95, blue: 0.95))
             .allowsHitTesting(!editPicData.startEditPicture)
             .blur(radius: editPicData.startEditPicture ? 5 : 0)
             
@@ -40,6 +43,6 @@ struct CollectionMainView: View {
 
 struct PictureMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionMainView()
+        CollectionContentView()
     }
 }
