@@ -115,7 +115,7 @@ def Put_CPic(id):
 
 #DELETE(削除)
 @app.route('/cpic/<int:id>', methods=["DELETE"])
-def delete(id):
+def delete_CPic(id):
     entry = CPic.query.get(id)
     db.session.delete(entry)
     db.session.commit()    

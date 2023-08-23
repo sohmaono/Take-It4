@@ -20,12 +20,12 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 User_schema = UserSchema(many = True)
 
 @app.route("/user", methods = ["GET"])
-def getAllText():
+def getAllUser():
     data = User.query.all()
     return jsonify(User_schema.dump(data))
 
 @app.route("/user/<int:id>", methods = ["GET"])
-def getText(id):
+def getUser(id):
     data = User.query.filter_by(id=id).all()
     return jsonify(User_schema.dump(data))
 
@@ -70,7 +70,7 @@ def Put_User(id):
 
 #DELETE(削除)
 @app.route('/user/<int:id>', methods=["DELETE"])
-def delete(id):
+def delete_user(id):
     entry = User.query.get(id)
     db.session.delete(entry)
     db.session.commit()    

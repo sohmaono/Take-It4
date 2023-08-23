@@ -88,7 +88,7 @@ def Put_CText(id):
 
 #DELETE(削除)
 @app.route('/ctext/<int:id>', methods=["DELETE"])
-def delete(id):
+def delete_CText(id):
     entry = CText.query.get(id)
     db.session.delete(entry)
     db.session.commit()    
