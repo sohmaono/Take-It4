@@ -1,44 +1,38 @@
 from src import app, db, ma
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String, desc
+from sqlalchemy import Column, Integer, String, desc, ARRAY
 
-# DBの作成
-class CText(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    font_scale = db.Column(db.Float)
-    font_weight = db.Column(db.Float)
-    line_spacing = db.Column(db.Float)
-    font_type = db.Column(db.String)
-    # position_x = db.Column(db.Float)
-    # position_y = db.Column(db.Float)
-    # italic = db.Column(db.Boolean)  #booleanの扱いがわからないからそこを調べる必要あり
+    sample = db.Column(ARRAY(db.String))
+
 
 # APIに初めてリクエストが送信されたときにだけデータベースの作成を行う
 @app.before_request
 def init():
     db.create_all()
 
-class CTextSchema(ma.SQLAlchemyAutoSchema):
+class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = CText
+        model = User
         
-ctext_schema = CTextSchema(many = True)
+User_schema = UserSchema(many = True)
 
-@app.route("/ctext", methods = ["GET"])
+@app.route("/user", methods = ["GET"])
 def getAllText():
-    data = CText.query.all()
-    return jsonify(ctext_schema.dump(data))
+    data = User.query.all()
+    return jsonify(User_schema.dump(data))
 
-@app.route("/ctext/<int:id>", methods = ["GET"])
+@app.route("/user/<int:id>", methods = ["GET"])
 def getText(id):
-    data = CText.query.filter_by(id=id).all()
-    return jsonify(ctext_schema.dump(data))
+    data = User.query.filter_by(id=id).all()
+    return jsonify(User_schema.dump(data))
 
 #POST(登録)
-@app.route('/ctext', methods=["POST"])
-def post_CText():
-    entry = CText()
+@app.route('/user', methods=["POST"])
+def post_User():
+    entry = User()
     # jsonリクエストから値取得
     json = request.get_json()
     if type(json) == list:
@@ -59,13 +53,13 @@ def post_CText():
     db.session.close()
 
     # latestdataが何を示しているのかを調べたい
-    latestdata= CText.query.order_by(desc(CText.id)).first()   
-    return redirect('/ctext/' + str(latestdata.id))
+    latestdata= User.query.order_by(desc(User.id)).first()   
+    return redirect('/user/' + str(latestdata.id))
 
 #PUT(更新)
-@app.route('/ctext/<int:id>', methods = ["PUT"])
-def Put_CText(id):
-    entry = CText.query.get(id)
+@app.route('/user/<int:id>', methods = ["PUT"])
+def Put_User(id):
+    entry = User.query.get(id)
     # jsonリクエストから値取得
     json = request.get_json()
     if type(json) == list:
@@ -84,12 +78,12 @@ def Put_CText(id):
     db.session.commit()
     db.session.close()
 
-    return redirect('/ctext/' + str(id))
+    return redirect('/user/' + str(id))
 
 #DELETE(削除)
-@app.route('/ctext/<int:id>', methods=["DELETE"])
+@app.route('/user/<int:id>', methods=["DELETE"])
 def delete(id):
-    entry = CText.query.get(id)
+    entry = User.query.get(id)
     db.session.delete(entry)
     db.session.commit()    
     db.session.close()
