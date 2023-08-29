@@ -21,8 +21,8 @@ struct CustomTabView2: View {
                 Capsule(style: .continuous)
                     .foregroundColor(Color(red: 0.3, green: 0.3, blue: 0.3))
                     .padding(.horizontal,32)
-                    .padding(.vertical,17)
-                    .frame(height: 72)
+                    .padding(.vertical,20)
+                    .frame(height: 78)
                 HStack {
                     ForEach(0...2,id:\.self){
                         item in

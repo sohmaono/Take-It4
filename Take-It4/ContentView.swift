@@ -20,7 +20,7 @@ struct ContentView: View {
                 
                 MyPageHomeView().tag(2)
             }
-            .tabViewStyle(.page)
+//            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
             
             CustomTabView2(num: $tabSelection)
@@ -31,6 +31,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-//            .environmentObject(PictureViewPageInf())
     }
 }

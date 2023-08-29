@@ -1,0 +1,171 @@
+//
+//  Show1.swift
+//  Take-It4
+//
+//  Created by 小野聡真 on 2023/08/24.
+//
+
+import SwiftUI
+import PhotosUI
+
+struct CShow1: View {
+    
+    @ObservedObject var contInfo: ContentInformation
+    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var otherData: COtherData
+    
+    @State var selectedPic: PhotosPickerItem? = nil
+    @State var rotate = false
+    @State var showBackCircle = false
+    
+    @Namespace var nameSpace
+    
+    var body: some View {
+        ZStack{
+            if otherData.show1{
+                VStack(spacing:15){
+                    Spacer()
+                    Spacer()
+                    
+                    HStack{
+                        Spacer()
+                        
+                            Button(action:{
+                                otherData.show1toggle(0.3)
+                                withAnimation(.linear(duration: 0.5)){
+                                    rotate = false
+                                }
+                            }){
+                                Image(systemName: "plus")
+                                    .font(.system(size: 17))
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding(.horizontal,15)
+                                    .foregroundColor(.black)
+                                    .opacity(0.7)
+                                    .rotationEffect(.degrees(rotate ? -45 : 0))
+                                    .background{
+                                        Circle()
+                                            .foregroundColor(.white)
+                                            .padding(6)
+                                            .opacity(showBackCircle ? 1:0)
+                                    }
+                            }
+                            .matchedGeometryEffect(id: "CollectionPlusButton", in: nameSpace)
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                    }
+                    VStack(spacing:12){
+                        PhotosPickerButton(
+                            otherData: otherData)
+                        
+                        Rectangle()
+                            .frame(width: 140, height: 2)
+                            .opacity(0.4)
+                        
+                        TextAddButton(
+                            contInfo: contInfo,
+                            otherData: otherData)
+                    }
+                    .padding(.horizontal,18)
+                    .padding(.top,21)
+                    .padding(.bottom,15)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .shadow(radius: 10)
+                    
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                }
+            } else {
+                HStack {
+                    VStack {
+                        Image(systemName: "plus")
+                            .font(.system(size: 23))
+                            .aspectRatio(contentMode: .fit)
+                            .padding(10)
+                            .foregroundColor(.black)
+                            .opacity(0.7)
+                            .rotationEffect(.degrees(rotate ? -45 : 0))
+                            .matchedGeometryEffect(id: "CollectionPlusButton", in: nameSpace)
+                            .onTapGesture {
+                                contInfo.saveSelected()
+                                DispatchQueue.main.asyncAfter(deadline: .now()+0.15){
+                                    self.otherData.show1toggle(0.15)
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now()+0.6){
+                                    withAnimation(.easeOut(duration: 0.3)){
+                                        self.showBackCircle = true
+                                    }
+                                }
+                                withAnimation(.easeOut(duration:0.2)){
+                                    rotate = true
+                                }
+                            }
+                            .onAppear{
+                                rotate = false
+                                showBackCircle = false
+                            }
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            }
+        }
+        .photosPicker(isPresented: $otherData.openPicker,selection: $selectedPic, matching: .images)
+        .onChange(of: selectedPic) { newValue in
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            editPicData.startEdit = true
+            otherData.toggleAndGetGeometry.toggle()
+            if let newValue {
+                Task.detached {
+                    guard let imageData = try? await newValue.loadTransferable(type: Data.self) else {
+                        return
+                    }
+                    await MainActor.run{
+                        if let selectedImage = UIImage(data: imageData){
+                            let ratio = selectedImage.size.width/selectedImage.size.height
+                            var finalImage = selectedImage
+                            if ratio > 1.6 {
+                                if let image = cropImage(
+                                    selectedImage,
+                                    Position(x: selectedImage.size.height*1.6,
+                                             y: selectedImage.size.height),
+                                    Position(x: (selectedImage.size.width-selectedImage.size.height*1.6)/2, y: 0),
+                                    selectedImage.size.width){
+                                    finalImage = image
+                                }
+                            } else if ratio < 1/1.6{
+                                if let image = cropImage(
+                                    selectedImage,
+                                    Position(x: selectedImage.size.width,
+                                             y: selectedImage.size.width*1.6),
+                                    Position(x: 0,
+                                             y: (selectedImage.size.height-selectedImage.size.width*1.6)/2),
+                                    selectedImage.size.height){
+                                    finalImage = image
+                                }
+                            }
+                            contInfo.putPicInfo1(
+                                pic: finalImage,
+                                position: .init(
+                                    x: UIScreen.main.bounds.width/2,
+                                    y: otherData.scrolledLength+300))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//struct Show1_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CollectionShow1(
+//            contInfo:ContentInformation(),
+//            editPicData: EditPicData())
+//    }
+//}

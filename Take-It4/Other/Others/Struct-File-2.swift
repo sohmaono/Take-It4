@@ -21,10 +21,6 @@ struct ColorCircleStruct{
 struct EditPictureData{
     var colorCircleInf = ColorCircleStruct(degrees1: 288, degrees2: 288, countLongWay: false)
     var comment = ""
-    var openFilterCircle = false
-    var forPlusMinusButtonAnimation = false
-    var openEditingMode = false
-    var changeEditAddingPicture = false
     var num1: Double = 0
     var num2: Double = 0
     var num3: Double = 0
@@ -54,4 +50,26 @@ struct ClippingPictureData{
     var clippedHeight: CGFloat{
         bottom - top
     }
+}
+
+struct CFilterCircleData {
+    var degrees1 = 288.0
+    var degrees2 = 288.0
+    var countLongWay = false
+    
+    
+    var degrees180point: Double = 0
+    
+    var trimFrom: Double = 0
+    var trimTo: Double = 0
+    var openTrim2 = false
+    var trimTo2: Double = 0
+    
+    var radian1: Double = 0
+    var oldDegrees1: Double = 0
+    var startedDrag1 = false
+    
+    var radian2: Double = 0
+    var oldDegrees2: Double = 0
+    var startedDrag2 = false
 }
