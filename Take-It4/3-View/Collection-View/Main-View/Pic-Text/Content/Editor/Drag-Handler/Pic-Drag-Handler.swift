@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionPicDragHandler: View {
+struct CPicDragHandler: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -41,11 +41,7 @@ struct CollectionPicDragHandler: View {
                 }
                 
                 if !dragData.drag2Started {
-                    withAnimation(.linear(duration: 0.05)){
-                        contInfo.selectedPicInfo!.position = Position(
-                            x:dragData.contentLastPosition.x+dragData.drag1Position.x-dragData.drag1StartLocation.x,
-                            y:dragData.contentLastPosition.y+dragData.drag1Position.y-dragData.drag1StartLocation.y)
-                    }
+                    CalculateDragAreaFuncPic1(contInfo: contInfo, dragData: dragData)
                 }
             }
             .onEnded { _ in
@@ -82,11 +78,7 @@ struct CollectionPicDragHandler: View {
                 }
                 
                 if !dragData.drag1Started{
-                    withAnimation(.linear(duration: 0.05)){
-                        contInfo.selectedPicInfo!.position = Position(
-                            x: dragData.contentLastPosition.x+dragData.drag2Position.x-dragData.drag2StartLocation.x,
-                            y: dragData.contentLastPosition.y+dragData.drag2Position.y-dragData.drag2StartLocation.y)
-                    }
+                    CalculateDragAreaFuncPic2(contInfo: contInfo, dragData: dragData)
                 }
             }
             .onEnded { _ in
@@ -125,7 +117,7 @@ struct CollectionPicDragHandler: View {
         .onChange(of: dragData.drag1Position.x+dragData.drag1Position.y+dragData.drag2Position.x+dragData.drag2Position.y) { _ in
             if dragData.drag2Started && dragData.drag1Started {
                 contInfo.selectedPicInfo!.imageWidth = dragData.calculateWidth()
-                contInfo.selectedPicInfo!.position = dragData.calculatePosition()
+                CalculateDragAreaFuncPic3(contInfo: contInfo, dragData: dragData)
             }
         }
     }

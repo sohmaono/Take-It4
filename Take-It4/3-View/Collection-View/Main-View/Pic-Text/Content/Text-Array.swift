@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionTextArray: View {
+struct CTextArray: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -17,7 +17,7 @@ struct CollectionTextArray: View {
             ForEach(contInfo.textInfoArray) { item in
                 Text(item.text)
                     .overlay{
-                        CollectionDragHandler(contInfo: contInfo, dragData: dragData)
+                        CDragHandler(contInfo: contInfo, dragData: dragData)
                             .simultaneousGesture(
                                 TapGesture()
                                     .onEnded({

@@ -16,11 +16,11 @@ struct ContentView: View {
             TabView(selection: $tabSelection){
                 CollectionContentView().tag(0)
                 
-                SharePictureHomeView().tag(1)
+//                SharePictureHomeView().tag(1)
                 
-                MyPageHomeView().tag(2)
+                MyPageHomeView().tag(1)
             }
-//            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
             
             CustomTabView2(num: $tabSelection)

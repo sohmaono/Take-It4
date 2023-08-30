@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionTextDragHandler: View {
+struct CTextDragHandler: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -16,8 +16,8 @@ struct CollectionTextDragHandler: View {
     
     var onText = false
     
-    var a:Double = 2
-    var b:CGFloat = 2
+    var a:Double = 1
+    var b:CGFloat = 1
     
     var gesture1: some Gesture{
         DragGesture(minimumDistance: 3)

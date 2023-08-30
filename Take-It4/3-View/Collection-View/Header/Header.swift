@@ -12,6 +12,7 @@ struct CollectionHeader: View {
     @ObservedObject var contInfo: ContentInformation
     
     @Binding var openPageMenu: Bool
+    @ObservedObject var e: EditPicData2
     @State var rotate = false
     
     var body: some View {

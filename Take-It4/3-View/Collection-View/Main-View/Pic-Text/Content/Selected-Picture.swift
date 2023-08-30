@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionSelectedPicture: View {
+struct CSelectedPic: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -40,78 +40,73 @@ struct CollectionSelectedPicture: View {
                         x: contInfo.selectedPicInfo!.position.x,
                         y: contInfo.selectedPicInfo!.position.y)
                     .animation(.linear(duration: 0.05), value: contInfo.selectedPicInfo!.position)
-                    .saturation(1+contInfo.selectedPicInfo!.num1*0.3)
-                    .brightness(-contInfo.selectedPicInfo!.num2*0.03)
-                    .contrast(1+contInfo.selectedPicInfo!.num3/9)
-                    .grayscale(contInfo.selectedPicInfo!.num4*0.25)
+                    .saturation(1+contInfo.selectedPicInfo!.num1*1.2)
+                    .brightness(-contInfo.selectedPicInfo!.num2*0.12)
+                    .contrast(1+contInfo.selectedPicInfo!.num3/9*4)
+                    .grayscale(contInfo.selectedPicInfo!.num4*1)
                     .colorMultiply(
                         Color(red: contInfo.selectedPicInfo!.colorArray[0],
-                              green: contInfo.selectedPicInfo!.colorArray[2],
-                              blue: contInfo.selectedPicInfo!.colorArray[1]))
-                    .onAppear{
-                        let size = contInfo.selectedPicInfo!.image
-                            .size
-                        contInfo.selectedPicInfo!.imageRatio = size.height/size.width
-                    }
+                              green: contInfo.selectedPicInfo!.colorArray[1],
+                              blue: contInfo.selectedPicInfo!.colorArray[2]))
                 
-                if focused2{
-                    TextEditor(text: $text)
-                        .fixedSize(horizontal: true, vertical: true)
-                        .lineLimit(2)
-                        .foregroundColor(Color(red: 0.3, green: 0.3, blue: 0.3))
-                        .font(.system(size: 14))
-                        .focused($focused)
-                        .position(
-                            x: contInfo.selectedPicInfo!.position.x,
-                            y: contInfo.selectedPicInfo!.position.y)
-                        .offset(
-                            y: contInfo.selectedPicInfo!.imageWidth * contInfo.selectedPicInfo!.imageRatio / 2 + 20)
-                        .onChange(of: text) { newValue in
-                            contInfo.selectedPicInfo!.comment = newValue
-                        }
-                        .toolbar{
-                            ToolbarItemGroup(placement: .keyboard){
-                                Spacer()
-                                Button(action: {
-                                    focused = false
-                                    focused2 = false
-                                    if text == "" {
-                                        contInfo.selectedPicInfo!.comment = "..."
-                                    }
-                                }){
-                                    Image(systemName: "arrowshape.right")
-                                        .resizable(resizingMode: .stretch)
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundColor(Color.black)
-                                        .frame(width: 25.0)
-                                        .rotationEffect(.degrees(90))
-                                }
-                            }
-                        }
-                } else {
-                    Text("\(contInfo.selectedPicInfo!.comment)")
-                        .frame(width: 175)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-                        .lineSpacing(-5)
-                        .foregroundColor(.gray)
-                        .font(.system(size: 13))
-                        .padding(30)
-                        .onTapGesture {
-                            focused = true
-                            focused2 = true
-                            if contInfo.selectedPicInfo!.comment != "..." {
-                                text = contInfo.selectedPicInfo!.comment
-                            } else {
-                                text = ""
-                            }
-                        }
-                        .position(
-                            x: contInfo.selectedPicInfo!.position.x,
-                            y: contInfo.selectedPicInfo!.position.y)
-                        .offset(
-                            y: contInfo.selectedPicInfo!.imageWidth * contInfo.selectedPicInfo!.imageRatio / 2 + 20)
-                }
+//                if focused2{
+//                    TextEditor(text: $text)
+//                        .fixedSize(horizontal: true, vertical: true)
+//                        .lineLimit(2)
+//                        .foregroundColor(Color(red: 0.3, green: 0.3, blue: 0.3))
+//                        .font(.system(size: 14))
+//                        .focused($focused)
+//                        .position(
+//                            x: contInfo.selectedPicInfo!.position.x,
+//                            y: contInfo.selectedPicInfo!.position.y)
+//                        .offset(
+//                            y: contInfo.selectedPicInfo!.imageWidth * contInfo.selectedPicInfo!.imageRatio / 2 + 20)
+//                        .onChange(of: text) { newValue in
+//                            contInfo.selectedPicInfo!.comment = newValue
+//                        }
+//                        .toolbar{
+//                            ToolbarItemGroup(placement: .keyboard){
+//                                Spacer()
+//                                Button(action: {
+//                                    focused = false
+//                                    focused2 = false
+//                                    if text == "" {
+//                                        contInfo.selectedPicInfo!.comment = "..."
+//                                    }
+//                                }){
+//                                    Image(systemName: "arrowshape.right")
+//                                        .resizable(resizingMode: .stretch)
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .foregroundColor(Color.black)
+//                                        .frame(width: 25.0)
+//                                        .rotationEffect(.degrees(90))
+//                                }
+//                            }
+//                        }
+//                } else {
+//                    Text("\(contInfo.selectedPicInfo!.comment)")
+//                        .frame(width: 175)
+//                        .multilineTextAlignment(.center)
+//                        .lineLimit(2)
+//                        .lineSpacing(-5)
+//                        .foregroundColor(.gray)
+//                        .font(.system(size: 13))
+//                        .padding(30)
+//                        .onTapGesture {
+//                            focused = true
+//                            focused2 = true
+//                            if contInfo.selectedPicInfo!.comment != "..." {
+//                                text = contInfo.selectedPicInfo!.comment
+//                            } else {
+//                                text = ""
+//                            }
+//                        }
+//                        .position(
+//                            x: contInfo.selectedPicInfo!.position.x,
+//                            y: contInfo.selectedPicInfo!.position.y)
+//                        .offset(
+//                            y: contInfo.selectedPicInfo!.imageWidth * contInfo.selectedPicInfo!.imageRatio / 2 + 20)
+//                }
             }
         }
     }

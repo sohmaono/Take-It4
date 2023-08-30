@@ -39,15 +39,15 @@ struct CShow1: View {
                                 Image(systemName: "plus")
                                     .font(.system(size: 17))
                                     .aspectRatio(contentMode: .fit)
-                                    .padding(.horizontal,15)
+                                    .padding(15)
                                     .foregroundColor(.black)
                                     .opacity(0.7)
                                     .rotationEffect(.degrees(rotate ? -45 : 0))
                                     .background{
                                         Circle()
                                             .foregroundColor(.white)
-                                            .padding(6)
-                                            .opacity(showBackCircle ? 1:0)
+                                            .opacity(showBackCircle ? 0.4:0)
+                                            .padding(11)
                                     }
                             }
                             .matchedGeometryEffect(id: "CollectionPlusButton", in: nameSpace)
@@ -118,7 +118,7 @@ struct CShow1: View {
         .photosPicker(isPresented: $otherData.openPicker,selection: $selectedPic, matching: .images)
         .onChange(of: selectedPic) { newValue in
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            editPicData.startEdit = true
+            editPicData.startedFromPicker = true
             otherData.toggleAndGetGeometry.toggle()
             if let newValue {
                 Task.detached {
@@ -127,7 +127,7 @@ struct CShow1: View {
                     }
                     await MainActor.run{
                         if let selectedImage = UIImage(data: imageData){
-                            let ratio = selectedImage.size.width/selectedImage.size.height
+                            var ratio = selectedImage.size.width/selectedImage.size.height
                             var finalImage = selectedImage
                             if ratio > 1.6 {
                                 if let image = cropImage(
@@ -135,8 +135,9 @@ struct CShow1: View {
                                     Position(x: selectedImage.size.height*1.6,
                                              y: selectedImage.size.height),
                                     Position(x: (selectedImage.size.width-selectedImage.size.height*1.6)/2, y: 0),
-                                    selectedImage.size.width){
+                                    selectedImage.size.width,selectedImage.size.height){
                                     finalImage = image
+                                    ratio = 1.6
                                 }
                             } else if ratio < 1/1.6{
                                 if let image = cropImage(
@@ -145,15 +146,21 @@ struct CShow1: View {
                                              y: selectedImage.size.width*1.6),
                                     Position(x: 0,
                                              y: (selectedImage.size.height-selectedImage.size.width*1.6)/2),
-                                    selectedImage.size.height){
+                                    selectedImage.size.width,selectedImage.size.height){
                                     finalImage = image
+                                    ratio = 1/1.6
                                 }
                             }
                             contInfo.putPicInfo1(
                                 pic: finalImage,
                                 position: .init(
                                     x: UIScreen.main.bounds.width/2,
-                                    y: otherData.scrolledLength+300))
+                                    y: otherData.scrolledLength+300),
+                                imageRatio: ratio)
+                            
+                            if let data = contInfo.selectedPicInfo {
+                                EditStartingFunc(data, editPicData)
+                            }
                         }
                     }
                 }

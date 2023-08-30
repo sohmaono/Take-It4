@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionSelectedText: View {
+struct CSelectedText: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData

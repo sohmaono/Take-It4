@@ -27,7 +27,7 @@ struct CollectionMainView: View {
                     .padding(4)
                     GeometryReader {
                         geometry in
-                        CollectionPicText(
+                        CPicText(
                             contInfo: contInfo,
                             dragData: dragData)
                         .onAppear{

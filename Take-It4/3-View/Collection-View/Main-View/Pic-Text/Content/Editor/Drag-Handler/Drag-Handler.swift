@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionDragHandler: View {
+struct CDragHandler: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -16,13 +16,13 @@ struct CollectionDragHandler: View {
     
     var body: some View {
         if contInfo.selectedPicInfo != nil {
-            CollectionPicDragHandler(
+            CPicDragHandler(
                 contInfo: contInfo,
                 dragData: dragData,
                 addX:addX,
                 addY:addY)
         } else if contInfo.selectedTextInfo != nil {
-            CollectionTextDragHandler(
+            CTextDragHandler(
                 contInfo: contInfo,
                 dragData: dragData,
                 addX:addX,

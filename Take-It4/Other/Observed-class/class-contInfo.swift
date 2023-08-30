@@ -22,7 +22,8 @@ class ContentInformation: ObservableObject {
     
     func putPicInfo1(
         pic: UIImage,
-        position: Position){
+        position: Position,
+        imageRatio: Double){
             selectedPicInfo = PictureInformationStruct(
                 image: pic,
                 position: position,
@@ -35,7 +36,8 @@ class ContentInformation: ObservableObject {
                 comment: "",
                 time: Date(),
                 id: UUID(),
-                likedNum: 0)
+                likedNum: 0,
+                imageRatio: imageRatio)
         }
     func putPicInfo2(
         item: PictureInformationStruct){

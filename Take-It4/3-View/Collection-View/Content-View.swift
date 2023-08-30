@@ -22,7 +22,8 @@ struct CollectionContentView: View {
                 
                 CollectionHeader(
                     contInfo: contInfo,
-                    openPageMenu: $openPageMenu)
+                    openPageMenu: $openPageMenu,
+                    e: editPicData)
                 
                 CollectionMainView(
                     contInfo: contInfo,
@@ -34,7 +35,7 @@ struct CollectionContentView: View {
             .allowsHitTesting(!editPicData.startEdit)
             .blur(radius: editPicData.startEdit ? 5:0)
             .overlay{
-                Color.black.opacity(otherData.show1 ? 0.04:0)
+                Color.black.opacity(otherData.show1 ? 0.3:0)
                     .ignoresSafeArea()
             }
             .overlay{

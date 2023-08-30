@@ -16,14 +16,14 @@ struct DeleteEditSave: View{
         VStack {
             HStack {
                 Spacer()
-                VStack(spacing:8){
+                VStack(spacing:12){
                     Button(action:{
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         contInfo.deleteSelected()
                     }){
                         ZStack{
                             RoundedRectangle(cornerRadius: 12)
-                                .frame(width: 63,height: 22)
+                                .frame(width: 66,height: 24)
                                 .foregroundColor(.black)
                                 .opacity(0.5)
                             Text("Delete")
@@ -35,13 +35,13 @@ struct DeleteEditSave: View{
                     if contInfo.selectedPicInfo != nil{
                         Button(action:{
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                            withAnimation(.easeOut(duration: 0.1)){
-                                editPicData.startEdit = true
+                            if let data = contInfo.selectedPicInfo {
+                                EditStartingFunc(data, editPicData)
                             }
                         }){
                             ZStack{
                                 RoundedRectangle(cornerRadius: 12)
-                                    .frame(width: 60, height: 20)
+                                    .frame(width: 63, height: 22)
                                     .foregroundColor(.black)
                                     .opacity(0.5)
                                 Text("Edit")
@@ -57,11 +57,11 @@ struct DeleteEditSave: View{
                     }){
                         ZStack{
                             Circle()
-                                .frame(width: 34.5, height: 34.5)
+                                .frame(width: 36, height: 36)
                                 .foregroundColor(.blue)
                                 .opacity(0.7)
                             Image(systemName: "arrow.down.to.line.compact")
-                                .frame(width: 35, height: 35)
+                                .frame(width: 36, height: 36)
                                 .foregroundColor(.black)
                         }
                     }

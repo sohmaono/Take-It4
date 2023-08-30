@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CollectionPicText: View {
+struct CPicText: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -15,27 +15,30 @@ struct CollectionPicText: View {
     
     var body: some View {
         ZStack{
-            CollectionDragHandler(
+            CDragHandler(
                 contInfo: contInfo,
                 dragData: dragData)
             
-            CollectionPictureArray(
+            CPitureArray(
                 contInfo: contInfo,
                 dragData: dragData)
-            CollectionTextArray(
+            CTextArray(
                 contInfo: contInfo,
                 dragData: dragData)
             
             if contInfo.selectedPicInfo != nil {
-                CollectionSelectedPicture(
+                CSelectedPic(
                     contInfo: contInfo,
                     dragData: dragData)
             } else if contInfo.selectedTextInfo != nil {
-                CollectionSelectedText(
+                CSelectedText(
                     contInfo: contInfo,
                     dragData: dragData)
                 
             }
+        }
+        .onDisappear{
+            contInfo.saveSelected()
         }
     }
 }

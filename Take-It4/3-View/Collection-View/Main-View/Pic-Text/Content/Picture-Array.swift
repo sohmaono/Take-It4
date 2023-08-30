@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct CollectionPictureArray: View {
+struct CPitureArray: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -18,32 +18,21 @@ struct CollectionPictureArray: View {
                     Image(uiImage: info.image)
                         .resizable(resizingMode: .stretch)
                         .aspectRatio(contentMode: .fit)
-//                        .overlay{
-//                            CollectionDragHandler(contInfo: contInfo, dragData: dragData)
-//                                .simultaneousGesture(TapGesture().onEnded{
-//                                    if !(dragData.drag1Started || dragData.drag2Started){
-//                                        contInfo.saveSelected()
-//                                        DispatchQueue.main.async{
-//                                            contInfo.putPicInfo2(item: info)
-//                                        }
-//                                    }
-//                                })
-//                        }
                         .clipShape(
                             RoundedRectangle(
                                 cornerRadius: info.imageWidth/45))
-                        .saturation(1+info.num1*0.3)
-                        .brightness(-info.num2*0.03)
-                        .contrast(1+info.num3/9)
-                        .grayscale(info.num4*0.25)
-                        .colorMultiply(Color(red: info.colorArray[0], green: info.colorArray[2], blue: info.colorArray[1]))
+                        .saturation(1+info.num1*1.2)
+                        .brightness(-info.num2*0.12)
+                        .contrast(1+info.num3/9*4)
+                        .grayscale(info.num4*1)
+                        .colorMultiply(Color(red: info.colorArray[0], green: info.colorArray[1], blue: info.colorArray[2]))
                         .onTapGesture {
                             contInfo.saveSelected()
                             DispatchQueue.main.async{
                                 contInfo.putPicInfo2(item: info)
                             }
                     }
-                    CollectionDragHandler(
+                    CDragHandler(
                         contInfo: contInfo,
                         dragData: dragData,
                         addX: info.position.x,

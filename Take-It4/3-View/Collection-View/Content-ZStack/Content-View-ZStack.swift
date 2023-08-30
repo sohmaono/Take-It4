@@ -19,7 +19,8 @@ struct CContentViewZStack: View {
         ZStack{
             CEditingPicture(
                 contInfo: contInfo,
-                editPicData: editPicData)
+                editPicData: editPicData,
+                otherData: otherData)
             
             CShow1(
                 contInfo: contInfo,

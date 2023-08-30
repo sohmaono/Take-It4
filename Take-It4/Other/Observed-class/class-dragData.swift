@@ -67,4 +67,12 @@ class DragData: ObservableObject {
         firstTwoFingerDistance = 0
         showGesture2 = false
     }
+    
+    @Published var showFrame = false
+    
+    func showFrameToggle(){
+        withAnimation(.easeOut(duration: 0.5).delay(0.1)){
+            showFrame.toggle()
+        }
+    }
 }
