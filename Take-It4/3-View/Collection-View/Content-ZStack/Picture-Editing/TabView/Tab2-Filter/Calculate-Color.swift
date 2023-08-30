@@ -40,6 +40,7 @@ func CalculateColorMultiply(start:Int,end:Int,colorTotal:Double)->[Double]{
     return [redDouble+basicColor,greenDouble+basicColor,blueDouble+basicColor]
 }
 
+
 func CalculateWithStartEnd(start:Int,end:Int)->[Int]{
     var bluePoints = 0
     var greenPoints = 0
