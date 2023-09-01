@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CEditTab1: View {
     
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     
     var body: some View {
         VStack{

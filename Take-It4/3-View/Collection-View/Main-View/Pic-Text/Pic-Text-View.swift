@@ -12,9 +12,9 @@ struct CPicText: View {
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
     
-    
     var body: some View {
         ZStack{
+            
             CDragHandler(
                 contInfo: contInfo,
                 dragData: dragData)

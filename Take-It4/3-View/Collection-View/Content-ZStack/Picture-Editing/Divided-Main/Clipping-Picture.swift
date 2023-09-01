@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CClippingPicture: View {
     
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     
     var tabSelection: Int
     

@@ -10,7 +10,7 @@ import SwiftUI
 struct CContentViewZStack: View {
     
     @ObservedObject var contInfo: ContentInformation
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     @ObservedObject var otherData: COtherData
     
     @Binding var openPageMenu: Bool

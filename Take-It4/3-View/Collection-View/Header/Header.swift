@@ -12,7 +12,7 @@ struct CollectionHeader: View {
     @ObservedObject var contInfo: ContentInformation
     
     @Binding var openPageMenu: Bool
-    @ObservedObject var e: EditPicData2
+    @ObservedObject var e: EditPicData
     @State var rotate = false
     
     var body: some View {
@@ -31,6 +31,7 @@ struct CollectionHeader: View {
                     .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                     .font(.system(size: 17))
                     .italic()
+//                    .fontWeight(.bold)
                 Image(systemName: "chevron.down")
                     .resizable(resizingMode: .stretch)
                     .aspectRatio(contentMode: .fit)
@@ -41,9 +42,15 @@ struct CollectionHeader: View {
             .padding(.horizontal,11)
             .padding(.vertical,8)
             .background{
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color(red: 0.9, green: 0.9, blue: 0.9))
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundColor(Color(red: 0.95, green: 0.95, blue: 0.95))
             }
+            .overlay{
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 2)
+                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+            }
+            .offset(y:-1)
         }
         .onChange(of: openPageMenu) { newValue in
             withAnimation(.linear(duration:0.2)){

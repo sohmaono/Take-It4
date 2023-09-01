@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CPicDragHandler: View {
+struct CollectionPicDragHandler: View {
     
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var dragData: DragData
@@ -41,7 +41,11 @@ struct CPicDragHandler: View {
                 }
                 
                 if !dragData.drag2Started {
-                    CalculateDragAreaFuncPic1(contInfo: contInfo, dragData: dragData)
+                    withAnimation(.linear(duration: 0.05)){
+                        contInfo.selectedPicInfo!.position = Position(
+                            x:dragData.contentLastPosition.x+dragData.drag1Position.x-dragData.drag1StartLocation.x,
+                            y:dragData.contentLastPosition.y+dragData.drag1Position.y-dragData.drag1StartLocation.y)
+                    }
                 }
             }
             .onEnded { _ in
@@ -78,7 +82,11 @@ struct CPicDragHandler: View {
                 }
                 
                 if !dragData.drag1Started{
-                    CalculateDragAreaFuncPic2(contInfo: contInfo, dragData: dragData)
+                    withAnimation(.linear(duration: 0.05)){
+                        contInfo.selectedPicInfo!.position = Position(
+                            x: dragData.contentLastPosition.x+dragData.drag2Position.x-dragData.drag2StartLocation.x,
+                            y: dragData.contentLastPosition.y+dragData.drag2Position.y-dragData.drag2StartLocation.y)
+                    }
                 }
             }
             .onEnded { _ in
@@ -117,7 +125,7 @@ struct CPicDragHandler: View {
         .onChange(of: dragData.drag1Position.x+dragData.drag1Position.y+dragData.drag2Position.x+dragData.drag2Position.y) { _ in
             if dragData.drag2Started && dragData.drag1Started {
                 contInfo.selectedPicInfo!.imageWidth = dragData.calculateWidth()
-                CalculateDragAreaFuncPic3(contInfo: contInfo, dragData: dragData)
+                contInfo.selectedPicInfo!.position = dragData.calculatePosition()
             }
         }
     }

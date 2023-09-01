@@ -10,7 +10,7 @@ import SwiftUI
 struct PictureEditTopButton: View {
     
     @ObservedObject var contInfo: ContentInformation
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     @ObservedObject var otherData: COtherData
     
     var body: some View {

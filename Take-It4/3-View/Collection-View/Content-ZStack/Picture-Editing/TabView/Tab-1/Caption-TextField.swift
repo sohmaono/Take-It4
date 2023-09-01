@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CCaptionTextField: View {
     
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     
     @FocusState var focusTextField: Bool
     

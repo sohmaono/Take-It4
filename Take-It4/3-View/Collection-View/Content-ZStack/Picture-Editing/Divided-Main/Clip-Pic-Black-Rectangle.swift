@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ClipPicBlackRectangle: View {
     
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     
     var body: some View {
         ZStack{

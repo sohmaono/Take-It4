@@ -9,7 +9,7 @@ import SwiftUI
 struct CEditingPicture: View {
     
     @ObservedObject var contInfo: ContentInformation
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     @ObservedObject var otherData: COtherData
     
     @State var tabSelection = 1
@@ -66,7 +66,7 @@ struct PictureMainViewwww_Previews: PreviewProvider {
     static var previews: some View {
         CEditingPicture(
             contInfo: ContentInformation(),
-            editPicData: EditPicData2(),
+            editPicData: EditPicData(),
         otherData: COtherData())
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CEditTab2: View {
     
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     
     @State var toggleMode = true
     
@@ -105,6 +105,6 @@ struct CEditTab2: View {
 
 struct Tab2__Main_Previews: PreviewProvider {
     static var previews: some View {
-        CEditTab2(editPicData: EditPicData2())
+        CEditTab2(editPicData: EditPicData())
     }
 }

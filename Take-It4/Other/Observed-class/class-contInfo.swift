@@ -16,6 +16,14 @@ class ContentInformation: ObservableObject {
     @Published var picInfoArray: [PictureInformationStruct] = []
     @Published var textInfoArray: [TextInformationStruct] = []
     
+    var picCount: Int{
+        if let selectedPicInfo {
+            return picInfoArray.count + 1
+        } else {
+            return picInfoArray.count
+        }
+    }
+    
     var selectedBool: Bool{
         selectedPicInfo != nil || selectedTextInfo != nil
     }
@@ -81,7 +89,7 @@ class ContentInformation: ObservableObject {
     }
     
     
-    @Published var frameHeight: CGFloat = 480
+    @Published var frameHeight: CGFloat = 550
     
     func addFrameHeight(){
         if frameHeight <= 12000 {

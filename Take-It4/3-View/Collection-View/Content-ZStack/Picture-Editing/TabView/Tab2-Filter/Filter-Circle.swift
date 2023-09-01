@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CFilterCircle: View {
     
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     
     @State var geometrySize: CGSize = .zero
     @State var stopCalculate = false

@@ -10,7 +10,7 @@ import SwiftUI
 struct CollectionMainView: View {
     
     @ObservedObject var contInfo: ContentInformation
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     @ObservedObject var dragData: DragData
     @ObservedObject var otherData: COtherData
     
@@ -19,12 +19,14 @@ struct CollectionMainView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                VStack(spacing: 0){
+                VStack(spacing: 10){
+                    
                     HStack{
                         Spacer()
-                        CollectionLikedPictureNumber()
+                        CollectionLikedPictureNumber(contInfo: contInfo)
                     }
                     .padding(4)
+                    
                     GeometryReader {
                         geometry in
                         CPicText(
@@ -41,23 +43,26 @@ struct CollectionMainView: View {
                             otherData.firstGeometryPosition-geometry.frame(in: .global).minY
                         }
                     }
+                    .overlay{
+                        Color("CMainFrameShowing")
+                            .opacity(dragData.showBFrame ? 0.1:0)
+                            .allowsHitTesting(false)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(.horizontal,10)
                     .frame(height: contInfo.frameHeight)
                     .clipped()
-                    
-                    Text("Take-It.")
-                        .font(.system(size: 13))
-                        .fontWeight(.heavy)
                     
                     FrameHeightButton(contInfo: contInfo)
                 }
             }
+            
             .scrollDisabled(contInfo.selectedBool)
             
-            if contInfo.selectedBool {
-                DeleteEditSave(
-                    contInfo: contInfo,
-                    editPicData: editPicData)
-            }
+            DeleteEditSave(
+                contInfo: contInfo,
+                editPicData: editPicData,
+                dragData: dragData)
         }
     }
 }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+fileprivate var multipleDrag: CGFloat = 1.2
+
 class DragData: ObservableObject {
     
     @Published var drag1Started = false
@@ -29,8 +31,11 @@ class DragData: ObservableObject {
     @Published var showGesture2 = false
     
     func calculatePosition()->Position{
-        Position(x: contentLastPosition.x + (drag2Position.x-drag2StartLocation.x+drag1Position.x-drag1StartLocation.x)/2,
-                 y: contentLastPosition.y + (drag2Position.y-drag2StartLocation.y+drag1Position.y-drag1StartLocation.y)/2)
+        Position(
+            x: contentLastPosition.x + (
+                drag2Position.x-drag2StartLocation.x+drag1Position.x-drag1StartLocation.x)/2*multipleDrag,
+            y: contentLastPosition.y + (
+                drag2Position.y-drag2StartLocation.y+drag1Position.y-drag1StartLocation.y)/2*multipleDrag)
     }
     
     func calculateFontScale()->Double{
@@ -45,10 +50,10 @@ class DragData: ObservableObject {
     
     func calculateWidth()->Double{
         var width = (Double((pow((drag1Position.x-drag2Position.x),2) + pow((drag1Position.y-drag2Position.y),2))).squareRoot()-firstTwoFingerDistance)*1.3+contentLastWidth
-        if width >= 250 {
-            width = 270
-        } else if width <= 110{
-            width = 110
+        if width >= 200 {
+            width = 200
+        } else if width <= 90{
+            width = 90
         }
         return width
     }
@@ -68,11 +73,48 @@ class DragData: ObservableObject {
         showGesture2 = false
     }
     
-    @Published var showFrame = false
+    @Published var showTFrame = false
+    @Published var showBFrame = false
+    @Published var showHFrame = false
     
-    func showFrameToggle(){
-        withAnimation(.easeOut(duration: 0.5).delay(0.1)){
-            showFrame.toggle()
+    func showTFrameToggle(_ bool: Bool){
+        var sec: Double
+        if bool{
+            sec = 0.5
+        } else {
+            sec = 0.15
+        }
+        if showTFrame != bool {
+            if !showTFrame{
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            }
+            withAnimation(.easeOut(duration: sec).delay(0.1)){
+                showTFrame.toggle()
+            }
+        }
+    }
+    func showBFrameToggle(_ bool: Bool){
+        var sec: Double
+        if bool{
+            sec = 0.5
+        } else {
+            sec = 0.15
+        }
+        if showBFrame != bool {
+            if !showBFrame{
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            }
+            withAnimation(.easeOut(duration: sec).delay(0.1)){
+                showBFrame.toggle()
+            }
+        }
+    }
+    func showHFrameToggle(_ bool: Bool){
+        if showHFrame != bool{
+            if !showHFrame{
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            }
+            showHFrame.toggle()
         }
     }
 }

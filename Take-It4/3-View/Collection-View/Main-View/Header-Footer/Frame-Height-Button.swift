@@ -12,39 +12,44 @@ struct FrameHeightButton: View {
     @ObservedObject var contInfo: ContentInformation
     
     var body: some View {
-        HStack{
-            Spacer()
-            Button(action: {
-                contInfo.saveSelected()
-                withAnimation(.easeOut(duration: 0.2)){
-                    contInfo.addFrameHeight()
-                }
-            }){
-                Image(systemName: "chevron.down.circle.fill")
-                    .resizable(resizingMode: .stretch)
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(Color(red: 0.15, green: 0.15, blue: 0.15))
-                    .frame(width: 35)
-                    .padding(5)
-            }
+        VStack(spacing:10){
+            Text("Take-It.")
+                .font(.system(size: 13))
+                .fontWeight(.heavy)
             
-            Button(action: {
-                contInfo.saveSelected()
-                withAnimation(.easeOut(duration: 0.2)){
-                    contInfo.subtractFrameHeight()
+            HStack{
+                Spacer()
+                Button(action: {
+                    contInfo.saveSelected()
+                    withAnimation(.easeOut(duration: 0.2)){
+                        contInfo.addFrameHeight()
+                    }
+                }){
+                    Image(systemName: "chevron.down.circle.fill")
+                        .resizable(resizingMode: .stretch)
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color(red: 0.15, green: 0.15, blue: 0.15))
+                        .frame(width: 35)
+                        .padding(5)
                 }
-            }){
-                Image(systemName: "chevron.up.circle.fill")
-                    .resizable(resizingMode: .stretch)
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(Color(red: 0.15, green: 0.15, blue: 0.15))
-                    .frame(width: 35)
-                    .padding(5)
+                
+                Button(action: {
+                    contInfo.saveSelected()
+                    withAnimation(.easeOut(duration: 0.2)){
+                        contInfo.subtractFrameHeight()
+                    }
+                }){
+                    Image(systemName: "chevron.up.circle.fill")
+                        .resizable(resizingMode: .stretch)
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(Color(red: 0.15, green: 0.15, blue: 0.15))
+                        .frame(width: 35)
+                        .padding(5)
+                }
+                Spacer()
             }
-            Spacer()
+            .padding(.bottom,50)
         }
-        .padding(.top,10)
-        .padding(.bottom,50)
     }
 }
 

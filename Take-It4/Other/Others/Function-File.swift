@@ -33,19 +33,7 @@ func cropImage(_ image:UIImage,_ size: Position,_ position: Position,_ width:CGF
     var cropSizeY: Double = 0
     var cropPositionX: Double = 0
     var cropPositionY: Double = 0
-//    if image.size.width >= image.size.height {
-//        let height = image.size.height/image.size.width*width
-//        cropSizeX = size.x/width*image.size.width
-//        cropSizeY = size.y/height*image.size.height
-//        cropPositionX = position.x/width*image.size.width
-//        cropPositionY = position.y/height*image.size.height
-//    } else {
-//        let width2 = image.size.width/image.size.height*width
-//        cropSizeX = size.x/width2*image.size.width
-//        cropSizeY = size.y/width*image.size.height
-//        cropPositionX = position.x/width2*image.size.width
-//        cropPositionY = position.y/width*image.size.height
-//    }
+    
     cropSizeX = size.x/width*image.size.width
     cropSizeY = size.y/height*image.size.height
     cropPositionX = position.x/width*image.size.width

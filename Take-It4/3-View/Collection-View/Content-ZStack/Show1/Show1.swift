@@ -11,7 +11,7 @@ import PhotosUI
 struct CShow1: View {
     
     @ObservedObject var contInfo: ContentInformation
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     @ObservedObject var otherData: COtherData
     
     @State var selectedPic: PhotosPickerItem? = nil
@@ -37,17 +37,18 @@ struct CShow1: View {
                                 }
                             }){
                                 Image(systemName: "plus")
-                                    .font(.system(size: 17))
+                                    .font(.system(size: 21))
                                     .aspectRatio(contentMode: .fit)
-                                    .padding(15)
+                                    .padding(.vertical,5)
+                                    .padding(.horizontal,15)
                                     .foregroundColor(.black)
-                                    .opacity(0.7)
+                                    .opacity(0.4)
                                     .rotationEffect(.degrees(rotate ? -45 : 0))
                                     .background{
                                         Circle()
                                             .foregroundColor(.white)
                                             .opacity(showBackCircle ? 0.4:0)
-                                            .padding(11)
+                                            .padding(1)
                                     }
                             }
                             .matchedGeometryEffect(id: "CollectionPlusButton", in: nameSpace)
@@ -84,19 +85,20 @@ struct CShow1: View {
                 HStack {
                     VStack {
                         Image(systemName: "plus")
-                            .font(.system(size: 23))
+                            .font(.system(size: 25))
                             .aspectRatio(contentMode: .fit)
-                            .padding(10)
+                            .padding(.vertical,5)
+                            .padding(.horizontal,15)
                             .foregroundColor(.black)
-                            .opacity(0.7)
+                            .opacity(0.8)
                             .rotationEffect(.degrees(rotate ? -45 : 0))
                             .matchedGeometryEffect(id: "CollectionPlusButton", in: nameSpace)
                             .onTapGesture {
                                 contInfo.saveSelected()
                                 DispatchQueue.main.asyncAfter(deadline: .now()+0.15){
-                                    self.otherData.show1toggle(0.15)
+                                    self.otherData.show1toggle(0.25)
                                 }
-                                DispatchQueue.main.asyncAfter(deadline: .now()+0.6){
+                                DispatchQueue.main.asyncAfter(deadline: .now()+1){
                                     withAnimation(.easeOut(duration: 0.3)){
                                         self.showBackCircle = true
                                     }
@@ -168,11 +170,3 @@ struct CShow1: View {
         }
     }
 }
-
-//struct Show1_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CollectionShow1(
-//            contInfo:ContentInformation(),
-//            editPicData: EditPicData())
-//    }
-//}

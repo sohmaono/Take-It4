@@ -10,66 +10,102 @@ import SwiftUI
 struct DeleteEditSave: View{
     
     @ObservedObject var contInfo: ContentInformation
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
+    @ObservedObject var dragData: DragData
+    
+    @State var showing = false
+    @State var dragging = false
     
     var body: some View{
-        VStack {
-            HStack {
-                Spacer()
-                VStack(spacing:12){
-                    Button(action:{
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        contInfo.deleteSelected()
-                    }){
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(width: 66,height: 24)
-                                .foregroundColor(.black)
-                                .opacity(0.5)
-                            Text("Delete")
-                                .font(.system(size: 13))
-                                .foregroundColor(.white)
-                                .bold()
-                        }
-                    }
-                    if contInfo.selectedPicInfo != nil{
+        if contInfo.selectedBool{
+            VStack {
+                HStack {
+                    Spacer()
+                    VStack(spacing:10){
                         Button(action:{
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                            if let data = contInfo.selectedPicInfo {
-                                EditStartingFunc(data, editPicData)
-                            }
+                            contInfo.deleteSelected()
                         }){
                             ZStack{
                                 RoundedRectangle(cornerRadius: 12)
-                                    .frame(width: 63, height: 22)
+                                    .frame(width: 60,height: 24)
                                     .foregroundColor(.black)
-                                    .opacity(0.5)
-                                Text("Edit")
-                                    .font(.system(size: 13.5))
+                                    .opacity(dragging ? 0.45:0.6)
+                                Text("Delete")
+                                    .font(.system(size: 12))
                                     .foregroundColor(.white)
                                     .bold()
                             }
                         }
-                    }
-                    Button(action:{
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        contInfo.saveSelected()
-                    }){
-                        ZStack{
-                            Circle()
-                                .frame(width: 36, height: 36)
-                                .foregroundColor(.blue)
-                                .opacity(0.7)
-                            Image(systemName: "arrow.down.to.line.compact")
-                                .frame(width: 36, height: 36)
-                                .foregroundColor(.black)
+                        if contInfo.selectedPicInfo != nil{
+                            Button(action:{
+                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                if let data = contInfo.selectedPicInfo {
+                                    EditStartingFunc(data, editPicData)
+                                }
+                            }){
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .frame(width: 60, height: 22)
+                                        .foregroundColor(.black)
+                                        .opacity(dragging ? 0.45:0.6)
+                                    Text("Edit")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.white)
+                                        .bold()
+                                }
+                            }
+                        }
+                        Button(action:{
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            withAnimation(.linear(duration: 0.1)){
+                                contInfo.saveSelected()
+                            }
+                        }){
+                            ZStack{
+                                Circle()
+                                    .frame(width: 36)
+                                    .foregroundColor(.blue)
+                                    .opacity(dragging ? 0.5:0.7)
+                                Image(systemName: "arrow.down.to.line.compact")
+                                    .frame(width: 34, height: 34)
+                                    .foregroundColor(.black)
+                                    .opacity(dragging ? 0.6:0.8)
+                            }
                         }
                     }
+                    .padding(.top,35)
+                    .padding(.horizontal,18)
+                    .offset(x:showing ? 0:100)
+                    .opacity(showing ? 1:0.5)
                 }
-                .padding(.top,28)
-                .padding(.horizontal,18)
+                Spacer()
             }
-            Spacer()
+            .allowsHitTesting(!dragging)
+            .onAppear{
+                withAnimation(.easeOut(duration: 0.3)){
+                    showing = true
+                }
+            }
+            .onDisappear{
+                withAnimation(.easeOut(duration: 0.3)){
+                    showing = false
+                }
+            }
+            .onChange(of: dragData.drag1Started || dragData.drag2Started) { newValue in
+                var sec: Double
+                var delay: Double
+                if newValue {
+                    sec = 0.1
+                    delay = 0
+                } else {
+                    sec = 0.2
+                    delay = 0.2
+                }
+                withAnimation(.easeOut(duration: sec).delay(delay)){
+                    dragging = newValue
+                }
+            }
         }
     }
 }

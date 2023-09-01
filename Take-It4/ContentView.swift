@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView(selection: $tabSelection){
-                CollectionContentView().tag(0)
+                CContentView().tag(0)
                 
 //                SharePictureHomeView().tag(1)
                 

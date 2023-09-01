@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class EditPicData2: ObservableObject {
+class EditPicData: ObservableObject {
     @Published var startEdit = false
     @Published var startedFromPicker = false
     

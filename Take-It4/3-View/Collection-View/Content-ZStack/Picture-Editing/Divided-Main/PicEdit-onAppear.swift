@@ -9,7 +9,7 @@ import SwiftUI
 
 func EditStartingFunc(
     _ data:PictureInformationStruct,
-    _ editPicData:EditPicData2){
+    _ editPicData:EditPicData){
         editPicData.num1 = data.num1
         editPicData.num2 = data.num2
         editPicData.num3 = data.num3

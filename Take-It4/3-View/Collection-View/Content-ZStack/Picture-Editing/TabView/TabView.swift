@@ -10,7 +10,7 @@ import SwiftUI
 struct CPictureEditTabView: View {
     
     @ObservedObject var contInfo: ContentInformation
-    @ObservedObject var editPicData: EditPicData2
+    @ObservedObject var editPicData: EditPicData
     
     @Binding var tabSelection: Int
     @State var tabSelection2 = 1

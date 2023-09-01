@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct CollectionContentView: View {
+struct CContentView: View {
     
     @StateObject var contInfo = ContentInformation()
-    @StateObject var editPicData = EditPicData2()
+    @StateObject var editPicData = EditPicData()
     @StateObject var dragData = DragData()
     @StateObject var otherData = COtherData()
     
@@ -35,11 +35,11 @@ struct CollectionContentView: View {
             .allowsHitTesting(!editPicData.startEdit)
             .blur(radius: editPicData.startEdit ? 5:0)
             .overlay{
-                Color.black.opacity(otherData.show1 ? 0.3:0)
+                Color.black.opacity(otherData.show1 ? 0.5:0)
                     .ignoresSafeArea()
             }
             .overlay{
-                Color.black.opacity(openPageMenu ? 0.18:0)
+                Color.black.opacity(openPageMenu ? 0.3:0)
                     .onTapGesture {
                         withAnimation(.linear(duration: 0.15)){
                             openPageMenu = false
@@ -53,12 +53,13 @@ struct CollectionContentView: View {
                 editPicData: editPicData,
                 otherData: otherData,
                 openPageMenu: $openPageMenu)
+            
         }
     }
 }
 
 struct PictureMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionContentView()
+        CContentView()
     }
 }

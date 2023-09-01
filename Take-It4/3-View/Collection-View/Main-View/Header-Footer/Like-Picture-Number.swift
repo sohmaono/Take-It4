@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct CollectionLikedPictureNumber: View {
+    
+    @ObservedObject var contInfo: ContentInformation
+    
+    @State var picCount = 0
+    
     var body: some View {
         VStack (spacing: 0){
             HStack(spacing:15){
@@ -25,7 +30,7 @@ struct CollectionLikedPictureNumber: View {
                         .resizable(resizingMode: .stretch)
                         .foregroundColor(.black)
                         .frame(width: 16.5, height: 14)
-                    Text("15")
+                    Text("\(contInfo.picCount)")
                         .foregroundColor(.black)
                         .font(.system(size: 12))
                 }
