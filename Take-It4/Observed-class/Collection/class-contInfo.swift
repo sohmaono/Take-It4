@@ -17,14 +17,14 @@ class ContentInformation: ObservableObject {
     @Published var textInfoArray: [TextInformationStruct] = []
     
     var picCount: Int{
-        if let selectedPicInfo {
+        if selectedPicInfo != nil{
             return picInfoArray.count + 1
         } else {
             return picInfoArray.count
         }
     }
     
-    var selectedBool: Bool{
+    var selectedBool: Bool {
         selectedPicInfo != nil || selectedTextInfo != nil
     }
     

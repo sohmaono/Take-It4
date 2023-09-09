@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CContentViewZStack: View {
     
+    @ObservedObject var folderHandler: FolderHandler
+    
     @ObservedObject var contInfo: ContentInformation
     @ObservedObject var editPicData: EditPicData
     @ObservedObject var otherData: COtherData
@@ -27,7 +29,9 @@ struct CContentViewZStack: View {
                 editPicData: editPicData,
                 otherData: otherData)
             
-            CPageMenu(openPageMenu: $openPageMenu)
+            CPageMenu(
+                folderHandler: folderHandler,
+                openPageMenu: $openPageMenu)
         }
     }
 }

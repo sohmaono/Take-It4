@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ExampleAllInformationStruct{
     var profileInf = ProfileInformationStruct()
-    var collectionArray: [CollectionInfStruct] = []
+    var collectionArray: [FolderInformationStruct] = []
 }
 
 struct ProfileInformationStruct{
@@ -20,30 +20,32 @@ struct ProfileInformationStruct{
     var profileImage = "porche1"
 }
 
-struct CollectionInfStruct: Identifiable{
-    var titleInf: PicturePageTitleStruct
-    var pictureInf: [PictureInformationStruct] = []
-    var textInf: [TextInformationStruct] = []
+struct FolderInformationStruct: Hashable,Identifiable{
+    var title = "MyLife"
+    var time = Date()
     var id = UUID()
 }
 
-struct PicturePageTitleStruct{
-    var title: String
+struct CollectionInfStruct: Identifiable{
+    var titleInf: String
+    var pictureInf: [PictureInformationStruct] = []
+    var textInf: [TextInformationStruct] = []
+    var id = UUID()
     var time = Date()
 }
 
 struct PictureInformationStruct: Identifiable{
-    var image: UIImage
-    var position: Position
-    var imageWidth: Double
-    var num1: Double
-    var num2: Double
-    var num3: Double
-    var num4: Double
-    var colorArray: [Double]
-    var comment: String
-    var time: Date
-    var id: UUID
+    var image: UIImage = UIImage(named: "porche1")!
+    var position: Position = Position(x:300,y:250)
+    var imageWidth: Double = 90
+    var num1: Double = 0
+    var num2: Double = 0
+    var num3: Double = 0
+    var num4: Double = 0
+    var colorArray: [Double] = [1,1,1]
+    var comment: String = "..."
+    var time: Date = Date()
+    var id: UUID = UUID()
     var likedNum = 0
     var imageRatio: Double = 1
 }

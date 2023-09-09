@@ -3,8 +3,8 @@
 //  Take-It3
 //
 //  Created by 小野聡真 on 2023/08/22.
-//
-//
+
+
 //import SwiftUI
 //
 //struct CollectionDate: View {

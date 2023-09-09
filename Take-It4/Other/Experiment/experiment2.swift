@@ -9,13 +9,19 @@ import SwiftUI
 
 struct experiment2: View {
     var body: some View {
-            Rectangle()
-                .stroke(lineWidth: 1.5)
-                .foregroundColor(Color.white)
-                .overlay{
-                    Rectangle()
-                }
-                .frame(width: 200, height: 200, alignment: .center)
+        NavigationStack{
+            GeometryReader { geo in
+                Rectangle()
+                    .opacity(0.5)
+                    .frame(width: 200, height: 200)
+                    .onAppear{
+                        print(geo.safeAreaInsets.top)
+                    }
+            }
+            .background{
+                Color.blue
+            }
+        }
     }
 }
 

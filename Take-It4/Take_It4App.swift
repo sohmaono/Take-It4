@@ -12,6 +12,7 @@ struct Take_It4App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(PracticeForMP())
         }
     }
 }

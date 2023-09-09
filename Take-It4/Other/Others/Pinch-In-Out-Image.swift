@@ -11,25 +11,17 @@ struct PinchInOutImage: View {
     
     @Binding var scale: CGFloat
     
-    var picture: String = "porche3"
+    var picture: String = "porche1"
     
     var body: some View {
         VStack{
             Image(picture)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.main.bounds.width)
                 .addPinchZoom(scale: $scale)
         }
     }
 }
-
-//extension View{
-//
-//    func getRect()->CGRect{
-//        return UIScreen.main.bounds
-//    }
-//}
 
 extension View{
     func addPinchZoom(scale: Binding<CGFloat>)->some View{

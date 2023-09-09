@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct CContentView: View {
+struct CContent2: View {
+    
+    @ObservedObject var folderHandler: FolderHandler
     
     @StateObject var contInfo = ContentInformation()
     @StateObject var editPicData = EditPicData()
@@ -21,9 +23,9 @@ struct CContentView: View {
             VStack(spacing: 0){
                 
                 CollectionHeader(
+                    folderHandler: folderHandler,
                     contInfo: contInfo,
-                    openPageMenu: $openPageMenu,
-                    e: editPicData)
+                    openPageMenu: $openPageMenu)
                 
                 CollectionMainView(
                     contInfo: contInfo,
@@ -49,17 +51,23 @@ struct CContentView: View {
             }
             
             CContentViewZStack(
+                folderHandler: folderHandler,
                 contInfo: contInfo,
                 editPicData: editPicData,
                 otherData: otherData,
                 openPageMenu: $openPageMenu)
-            
+        }
+        .onAppear{
+            print("onAppear")
+        }
+        .onChange(of: folderHandler.selectedFolder) { newValue in
+            print("onChange")
         }
     }
 }
 
 struct PictureMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CContentView()
+        CContent2(folderHandler: FolderHandler())
     }
 }

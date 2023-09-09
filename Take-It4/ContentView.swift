@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     @State var tabSelection = 0
     
     var body: some View {
         ZStack {
             TabView(selection: $tabSelection){
-                CContentView().tag(0)
+                CContent()
+                    .tag(0)
                 
-//                SharePictureHomeView().tag(1)
+                SharedCollectionView()
+                    .tag(1)
                 
-                MyPageHomeView().tag(1)
+                MyPageHomeView()
+                    .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
@@ -31,5 +33,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(PracticeForMP())
     }
 }

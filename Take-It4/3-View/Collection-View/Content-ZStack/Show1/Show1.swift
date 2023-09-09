@@ -48,7 +48,6 @@ struct CShow1: View {
                                         Circle()
                                             .foregroundColor(.white)
                                             .opacity(showBackCircle ? 0.4:0)
-                                            .padding(1)
                                     }
                             }
                             .matchedGeometryEffect(id: "CollectionPlusButton", in: nameSpace)
@@ -87,7 +86,6 @@ struct CShow1: View {
                         Image(systemName: "plus")
                             .font(.system(size: 25))
                             .aspectRatio(contentMode: .fit)
-                            .padding(.vertical,5)
                             .padding(.horizontal,15)
                             .foregroundColor(.black)
                             .opacity(0.8)
